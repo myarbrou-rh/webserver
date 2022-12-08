@@ -2,14 +2,17 @@
 # create a project
 oc new-project web-server-test
 
-# create a new application
+# create a webserver
 oc new-app nginx~https://github.com/myarbrou-rh/webserver
 
-# create a new application using a branch
+# create a webserver using a branch
 oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i
 
-# create a new application using a branch and a sub directory
+# create a webserver using a branch and a sub directory
 oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i --context-dir=subdir
+
+# create a webserver with a custom nginx.conf
+oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i --context-dir=configured
 
 # expose the webserver service to the outside world
 oc expose service/webserver
