@@ -1,27 +1,27 @@
+# Deploying a webserver using s2i
 
-# create a project
-oc new-project web-server-test
+1. fork this repo and replace the github url in the following commands with your repo
 
-# create a webserver
-oc new-app nginx~https://github.com/myarbrou-rh/webserver
+1. create a project<br/>
+`oc new-project web-server-test`
 
-# create a webserver using a branch
-oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i
+1. create a webserver with one of the following options
+    - using the top level directory on the main branch<br/>
+      `oc new-app nginx~https://github.com/myarbrou-rh/webserver`
+    - using the top level directory on a different branch<br/>
+      `oc new-app nginx~https://github.com/myarbrou-rh/webserver#feature-branch`
+    - using a sub directory<br/>
+      `oc new-app nginx~https://github.com/myarbrou-rh/webserver --context-dir=subdir`
+    - using a sub directory with a custom configuration<br/>
+      `oc new-app nginx~https://github.com/myarbrou-rh/webserver --context-dir=configured`
 
-# create a webserver using a branch and a sub directory
-oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i --context-dir=subdir
+1. expose the webserver service to the outside world<br/>
+`oc expose service/webserver`
 
-# create a webserver with a custom nginx.conf
-oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i --context-dir=configured
+1. start a new build (after updating the repo)<br/>
+`oc start-build webserver`<br/>
+or add webhook for continuous deployment<br/>
+see step 5 here https://developer.ibm.com/tutorials/continuous-deployment-s2i-and-webhooks/
 
-# expose the webserver service to the outside world
-oc expose service/webserver
-
-# start a new build (after updating the repo)
-oc start-build webserver
-
-# remove the application
-oc delete all -l app=webserver
-
-# add webhook for continuous deployment
-# see step 5 here https://developer.ibm.com/tutorials/continuous-deployment-s2i-and-webhooks/
+1. remove the application<br/>
+`oc delete all -l app=webserver`
