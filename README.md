@@ -19,3 +19,6 @@ oc start-build webserver
 
 # remove the application
 oc delete all -l app=webserver
+
+# add webhook for continuous deployment
+# see step 5 here https://developer.ibm.com/tutorials/continuous-deployment-s2i-and-webhooks/
