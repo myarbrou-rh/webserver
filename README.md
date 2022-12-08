@@ -9,7 +9,7 @@ oc new-app nginx~https://github.com/myarbrou-rh/webserver
 oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i
 
 # create a new application using a branch and a sub directory
-oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i --context-dir=simple
+oc new-app nginx~https://github.com/myarbrou-rh/webserver#use-s2i --context-dir=subdir
 
 # expose the webserver service to the outside world
 oc expose service/webserver
